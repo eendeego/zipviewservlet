@@ -1,0 +1,80 @@
+body {
+  background-color:#000080;
+  color:#ffffff;
+}
+
+.title {
+   color:#ffffff;
+   font-family: tahoma,verdana,arial,helvetica,sans-serif;
+   font-size: 14pt
+}
+
+.subtitle {
+  color:#ffffff;
+  font-family: tahoma,verdana,arial,helvetica,sans-serif;
+  font-size: 11pt
+}
+
+.data {
+  background-color:#101090;
+  color:#ffffff;
+  font-family: tahoma,verdana,arial,helvetica,sans-serif;
+  font-size: 9pt
+}
+
+.desc {
+  background-color:#101090;
+  color:#ffffff;
+  font-family: tahoma,verdana,arial,helvetica,sans-serif;
+  font-size: 9pt
+}
+.desc a:link    { color : #ffffff;text-decoration : none }
+.desc a:visited { color : #ffffff;text-decoration : none }
+.desc a:active  { color : #ffffff;text-decoration : none }
+
+.tableheader {
+  background-color : #ffffff;
+  color            : #000000;
+  font-family: tahoma,verdana,arial,helvetica,sans-serif;
+  font-size        : 10pt;
+  font-weight      : bold
+}
+
+.specialcell {
+  background-color : #ffffff;
+  color            : #000000;
+  font-family: tahoma,verdana,arial,helvetica,sans-serif;
+  font-size        : 9pt;
+  font-weight      : bold;
+  text-decoration  : none
+}
+.specialcell a:link    { color : #0000ff;text-decoration : none }
+.specialcell a:visited { color : #0000ff;text-decoration : none }
+.specialcell a:active  { color : #0000ff;text-decoration : none }
+
+.direntry {
+  color:#ffffff;
+  font-family: tahoma,verdana,arial,helvetica,sans-serif;
+  font-size: 9pt
+}
+.direntry a:link    { color : #ffffff;text-decoration : none }
+.direntry a:visited { color : #ffffff;text-decoration : none }
+.direntry a:active  { color : #ffffff;text-decoration : none }
+
+table.outerbox {
+  background-color:#ffffff
+}
+
+table.innerbox {
+  background-color:#101090
+}
+
+.notes {
+  color            : #ffffff;
+  font-family      : tahoma,verdana,arial,helvetica,sans-serif;
+  font-size        : 8pt
+}
+
+a:link    { color:#ff8000 }
+a:visited { color:#ff8000 }
+a:active  { color:#ff8000 }

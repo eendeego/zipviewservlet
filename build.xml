@@ -1,0 +1,60 @@
+<project name="ZipViewServlet" default="jarfile" basedir=".">
+  <property name="java.source"  value="src/java"/>
+  <property name="resources"    value="src/resources"/>
+
+  <property name="java.classes" value="build/classes"/>
+  <property name="build.dir"    value="build"/>
+  <property name="dist"         value="build/dist"/>
+  <property name="docroot"      value="build/dist/docroot"/>
+  <property name="jarfile"      value="build/dist/zipservlet.jar"/>
+  <property name="warfile"      value="build/dist/zipservlet.war"/>
+  <property name="tomcatdir"    value="tomcat"/>
+
+  <target name="init">
+    <mkdir dir="${java.classes}"/>
+    <mkdir dir="${dist}"/>
+    <mkdir dir="${docroot}"/>
+    <mkdir dir="${docroot}/WEB-INF"/>
+    <mkdir dir="${docroot}/WEB-INF/classes"/>
+    <mkdir dir="${docroot}/WEB-INF/lib"/>
+  </target>
+
+  <target name="classes" depends="init">
+    <javac srcdir="${java.source}" destdir="${java.classes}">
+      <classpath>
+	<pathelement path="${classpath}"/>
+	<!-- pathelement location="lib/xerces.jar"/ -->
+	<pathelement location="lib/servlet-api.jar"/>
+      </classpath>
+    </javac>
+  </target>
+  
+  <target name="jarfile" depends="classes">
+    <jar jarfile="${jarfile}" basedir="${java.classes}"/>
+  </target>
+
+  <target name="dist" depends="jarfile">
+    <zip destfile="${build.dir}/res.zip" basedir="${resources}">
+      <fileset dir="${resources}">
+	<filename name="images/01_down.gif"/>
+	<filename name="images/01_up.gif"/>
+	<filename name="styles/style.css"/>
+      </fileset>
+    </zip>
+
+    <copy file="src/conf/web.xml"     todir="${docroot}/WEB-INF"/>
+    <!-- copy file="conf/zipfiles.xml" todir="${tomcatdir}/conf"/ -->
+    <copy file="${build.dir}/res.zip" todir="${docroot}/WEB-INF"/>
+    <!-- copy file="lib/xerces.jar"    todir="${docroot}/WEB-INF/lib"/-->
+    <copy file="${jarfile}"        todir="${docroot}/WEB-INF/lib"/>
+  </target>
+
+  <target name="warfile" depends="dist">
+    <!--war warfile="${warfile}" webxml="conf/web.xml">
+	<fileset dir="${docroot}"/>
+	<lib dir="lib"/>
+	<lib includesfile="${jarfile}"/>
+    </war-->
+    <jar jarfile="${warfile}" basedir="${docroot}"/>
+  </target>
+</project>
