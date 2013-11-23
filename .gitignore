@@ -1,0 +1,11 @@
+# editors/ides etc
+*~
+nbproject
+sandbox.sh
+
+# build
+build
+conf
+
+# run (dev)
+tomcat
