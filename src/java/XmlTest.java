@@ -1,9 +1,7 @@
-import java.io.*;
-import java.util.*;
+import java.io.IOException;
 
-//import com.sun.xml.tree.*;
-import org.w3c.dom.*;
-import org.xml.sax.*;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 /**
  * Test for R/W Xml zipview files

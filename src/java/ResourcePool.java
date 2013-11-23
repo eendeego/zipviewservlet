@@ -1,5 +1,3 @@
-import java.util.*;
-
 /**
  * Implements a pool of resources
  */
@@ -69,25 +67,25 @@ public class ResourcePool {
 
     synchronized(pool) {
       while(true) {
-	if(freeEntries > 0) {
-	  for(i=0;i<pool.length && poolStatus[i]!=INITIALIZED;i++) ;
-	  poolStatus[i] = ALLOCATED;
-	  freeEntries--;
-	  //System.out.println("allocate:"+pool.length+"/"+usedSize+"/"+freeEntries);
-	  return pool[i];
-	} else if(usedSize < pool.length) {
-	  for(i=0;i<pool.length && poolStatus[i]!=UNUSED;i++) ;
-	  pool[i] = creator.createResource();
-	  usedSize++;
-	  poolStatus[i] = ALLOCATED;
-	  //System.out.println("create:"+pool.length+"/"+usedSize+"/"+freeEntries);
-	  return pool[i];
-	} else {
-	  try {
-	    pool.wait();
-	  } catch(InterruptedException e) {
-	  }
-	}
+        if(freeEntries > 0) {
+          for(i=0;i<pool.length && poolStatus[i]!=INITIALIZED;i++) ;
+          poolStatus[i] = ALLOCATED;
+          freeEntries--;
+          //System.out.println("allocate:"+pool.length+"/"+usedSize+"/"+freeEntries);
+          return pool[i];
+        } else if(usedSize < pool.length) {
+          for(i=0;i<pool.length && poolStatus[i]!=UNUSED;i++) ;
+          pool[i] = creator.createResource();
+          usedSize++;
+          poolStatus[i] = ALLOCATED;
+          //System.out.println("create:"+pool.length+"/"+usedSize+"/"+freeEntries);
+          return pool[i];
+        } else {
+          try {
+            pool.wait();
+          } catch(InterruptedException e) {
+          }
+        }
       }
     }
   }
@@ -96,36 +94,36 @@ public class ResourcePool {
      * Release one element to the pool
      */
     public void freeResource(Object resource) {
-	int i;
+        int i;
 
-	synchronized(pool) {
-	    for(i=0;i<pool.length && pool[i]!=resource;i++) ;
-	    poolStatus[i] = INITIALIZED;
-	    freeEntries++;
-	    //System.out.println("release:"+pool.length+"/"+usedSize+"/"+freeEntries);
-	    pool.notify();
-	}
+        synchronized(pool) {
+            for(i=0;i<pool.length && pool[i]!=resource;i++) ;
+            poolStatus[i] = INITIALIZED;
+            freeEntries++;
+            //System.out.println("release:"+pool.length+"/"+usedSize+"/"+freeEntries);
+            pool.notify();
+        }
     }
 
     /**
      * Flush the pool
      */
     public void flushResources() {
-	int i;
+        int i;
 
-	synchronized(pool) {
-	    //System.out.println("flush:"+pool.length+"/"+usedSize+"/"+freeEntries);
-	    for(i=0;i<pool.length;i++) {
-		if(poolStatus[i] == INITIALIZED) {
-		    creator.destroyResource(pool[i]);
-		    pool[i] = null;
-		    poolStatus[i] = UNUSED;
-		    freeEntries--;
-		    usedSize--;
-		}
-	    }
-	    pool.notify();
-	}
+        synchronized(pool) {
+            //System.out.println("flush:"+pool.length+"/"+usedSize+"/"+freeEntries);
+            for(i=0;i<pool.length;i++) {
+                if(poolStatus[i] == INITIALIZED) {
+                    creator.destroyResource(pool[i]);
+                    pool[i] = null;
+                    poolStatus[i] = UNUSED;
+                    freeEntries--;
+                    usedSize--;
+                }
+            }
+            pool.notify();
+        }
     }
 }
 

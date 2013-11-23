@@ -1,22 +1,21 @@
 /**
- * Ponto de entrada para um ficheiro Zip
+ * Default document in a zip file
  */
 public class EntryPoint {
   /**
-   * URL relativo (interno ao zip).
+   * Relative URL (internal to the zip).
    */
   public String url;
 
   /**
-   * Descricao do documento apontado pelo URL
+   * Document's description
    */
   public String description;
 
   /**
-   * Metodo standard
+   * String representation of the entry point
    */
   public String toString() {
     return url + ":" + description;
   }
 }
-
